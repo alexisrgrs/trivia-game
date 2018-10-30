@@ -1,34 +1,48 @@
-// Count of Right, Wrong, and unanswered Qustions
+// Keeps track of score
 var correctCount = 0;
 var wrongCount = 0;
 var unansweredCount = 0;
 
+
+
 // countdown from a minute
 var count = 60;
 
+
+
 $(document).ready(function () {
 
+    // Hides results until the end
+    $("#end_container").hide();
 
-    //transition from start screen to game
+
+    // Start game
     $("#start_button").on("click", function () {
 
-        // Hide the start screen
-        $("#start_container").hide();
-        // Show Game 
+        // Hides results until the end
+        $("#end_container").hide();
+
+        // Shows the questions
         $("#game_container").show();
 
         startCountdown();
-        return;
 
     });
+
+    // Countdown function
+    function startCountdown() {
+        setInterval(countdown, 1000);
+        count = 60;
+        
+    }
 
 
     // Counts down and displays time
     function countdown() {
-
+        
         // counting down right here
         count--;
-
+    
         // countdown is displayed
         $('#timer_number').html(count + " Seconds");
 
@@ -38,27 +52,30 @@ $(document).ready(function () {
             // Stop countdown and run the timeUp function
             count = 0;
             return;
+            clearInterval(increment);
+            
+            
         });
 
         // Finish the game when timer is complete 
         if (count == -1) {
             // Collect answers
             timeUp();
-            // Hide the questionse
+            // Hide the questions
             $("#game_container").hide();
+            // Resets Game and Counts
+            resetGame();
+            
+           
         }
     }
 
-    // countdown
-    function startCountdown() {
-
-        setInterval(countdown, 1000);
-    }
+    
 
     // Function starts after time is up
     function timeUp() {
 
-        // validated values
+        // values
         var Q1 = $('input:radio[name="q1"]:checked').val();
         var Q2 = $('input:radio[name="q2"]:checked').val();
         var Q3 = $('input:radio[name="q3"]:checked').val();
@@ -74,7 +91,7 @@ $(document).ready(function () {
         if (Q1 == undefined) {
             unansweredCount++;
         }
-        else if (Q1 == "Where Did Our Love Go") {v
+        else if (Q1 == "Where Did Our Love Go") {
             correctCount++;
         }
         else {
@@ -164,5 +181,31 @@ $(document).ready(function () {
     
 
     }
+
+    function resetGame() {
+        
+        // reset variables
+        wrongCount = 0;
+        correctCount = 0;
+        unansweredCount = 0;
+        count = 60;
+
+        
+
+        
+
+        
+
+        
+
+    
+    
+
+        
+
+    }
+     
+
+   
 
 });
