@@ -7,6 +7,7 @@ var unansweredCount = 0;
 
 // countdown from a minute
 var count = 60;
+var timer;
 
 
 
@@ -31,8 +32,12 @@ $(document).ready(function () {
 
     // Countdown function
     function startCountdown() {
-        setInterval(countdown, 1000);
+        
+        console.log(timer);
+        clearInterval(timer);
+        timer = setInterval(countdown, 1000);
         count = 60;
+        console.log(timer);
         
     }
 
